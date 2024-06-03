@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body, html {
+                margin: 0px;
+            }
+            img {
+
+                height: 100%;
+                width: 100%;
+            }
+            area {
+                border-style: dotted; 
+            }
+        </style>
+        <script>
+            /*! Image Map Resizer (imageMapResizer.min.js ) - v1.0.10 - 2019-04-10
+ *  Desc: Resize HTML imageMap to scaled image.
+ *  Copyright: (c) 2019 David J. Bradshaw - dave@bradshaw.net
+ *  License: MIT
+ */
+
+!function(){"use strict";function r(){function e(){var r={width:u.width/u.naturalWidth,height:u.height/u.naturalHeight},a={width:parseInt(window.getComputedStyle(u,null).getPropertyValue("padding-left"),10),height:parseInt(window.getComputedStyle(u,null).getPropertyValue("padding-top"),10)};i.forEach(function(e,t){var n=0;o[t].coords=e.split(",").map(function(e){var t=1==(n=1-n)?"width":"height";return a[t]+Math.floor(Number(e)*r[t])}).join(",")})}function t(e){return e.coords.replace(/ *, */g,",").replace(/ +/g,",")}function n(){clearTimeout(d),d=setTimeout(e,250)}function r(e){return document.querySelector('img[usemap="'+e+'"]')}var a=this,o=null,i=null,u=null,d=null;"function"!=typeof a._resize?(o=a.getElementsByTagName("area"),i=Array.prototype.map.call(o,t),u=r("#"+a.name)||r(a.name),a._resize=e,u.addEventListener("load",e,!1),window.addEventListener("focus",e,!1),window.addEventListener("resize",n,!1),window.addEventListener("readystatechange",e,!1),document.addEventListener("fullscreenchange",e,!1),u.width===u.naturalWidth&&u.height===u.naturalHeight||e()):a._resize()}function e(){function t(e){e&&(!function(e){if(!e.tagName)throw new TypeError("Object is not a valid DOM element");if("MAP"!==e.tagName.toUpperCase())throw new TypeError("Expected <MAP> tag, found <"+e.tagName+">.")}(e),r.call(e),n.push(e))}var n;return function(e){switch(n=[],typeof e){case"undefined":case"string":Array.prototype.forEach.call(document.querySelectorAll(e||"map"),t);break;case"object":t(e);break;default:throw new TypeError("Unexpected data type ("+typeof e+").")}return n}}"function"==typeof define&&define.amd?define([],e):"object"==typeof module&&"object"==typeof module.exports?module.exports=e():window.imageMapResize=e(),"jQuery"in window&&(window.jQuery.fn.imageMapResize=function(){return this.filter("map").each(r).end()})}();
+//# sourceMappingURL=imageMapResizer.map
+        </script>
+        <script>
+            let windowAnswer = 0;
+            let doorAnswer = 0;
+
+            function onWindowClick() {
+                const dialog = document.getElementById("windowDialog");
+                const answerButton = document.getElementById("answer");
+                dialog.showModal();
+
+                answerButton.addEventListener("click", () => {
+                    windowAnswer = document.getElementById("windowInput").value;
+                    dialog.close();
+                });
+            }
+
+            function onDoorClick() {
+                const dialog = document.getElementById("doorDialog");
+                const answerButton = document.getElementById("doorAnswer");
+                dialog.showModal();
+
+                answerButton.addEventListener("click", () => {
+                    doorAnswer = document.getElementById("doorInput").value;
+                    dialog.close();
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <image id="i1" src="/images/1.jpg" alt="Fredrikstad domkirke" usemap="#room1"/>
+        <map name="room1">
+            <area shape="rect" alt="klokke" coords="306,489,366,549" onclick="onWindowClick()"/>    
+            <area shape="rect" alt="dør" coords="302,842,362,965" onclick="onDoorClick()"/>
+        </map>
+        <dialog id="windowDialog">
+            <p>Hva er 2 + 2?</p>
+            <input id="windowInput" type="number" />
+            <button id="answer">Svar</button>
+        </dialog>
+        
+        <dialog id="doorDialog">
+            <p>Hva er 2 * 3?</p>
+            <input id="doorInput" type="number" />
+            <button id="doorAnswer">Svar</button>
+        </dialog>
+        <script>
+            imageMapResize();
+        </script>
+    </body>
+</html>
