@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8"/>
         <style>
             body, html {
                 margin: 0px;
@@ -34,7 +35,7 @@
                 dialog.showModal();
 
                 answerButton.addEventListener("click", () => {
-                    windowAnswer = document.getElementById("windowInput").value;
+                    windowAnswer = Number(document.getElementById("windowInput").value);
                     dialog.close();
                 });
             }
@@ -45,9 +46,17 @@
                 dialog.showModal();
 
                 answerButton.addEventListener("click", () => {
-                    doorAnswer = document.getElementById("doorInput").value;
+                    doorAnswer = Number(document.getElementById("doorInput").value);
                     dialog.close();
                 });
+            }
+
+            function onSpireClick() {
+                if(windowAnswer === 4 && doorAnswer === 6) {
+                    alert("Riktig svar! GRATULERER!!!");
+                } else {
+                    alert("FEIL! Har du funnet alle spørsmål?");
+                }
             }
         </script>
     </head>
@@ -56,6 +65,7 @@
         <map name="room1">
             <area shape="rect" alt="klokke" coords="306,489,366,549" onclick="onWindowClick()"/>    
             <area shape="rect" alt="dør" coords="302,842,362,965" onclick="onDoorClick()"/>
+            <area shape="rect" alt="spir" coords="304,34,374,106" onclick="onSpireClick()" >
         </map>
         <dialog id="windowDialog">
             <p>Hva er 2 + 2?</p>
